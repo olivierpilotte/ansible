@@ -1,0 +1,6 @@
+---
+
+- hosts: fractal
+  become: yes
+  roles:
+    - node-exporter

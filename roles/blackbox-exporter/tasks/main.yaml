@@ -1,0 +1,17 @@
+---
+
+- name: install prometheus-blackbox-exporter
+  package:
+    name: prometheus-blackbox-exporter-bin
+    state: present
+
+- name: write configuration file
+  template:
+    src: blackbox.yaml
+    dest: /etc/prometheus/blackbox.yaml
+
+- name: start prometheus-blackbox-exporter service
+  systemd:
+    name: prometheus-blackbox-exporter
+    enabled: yes
+    state: restarted

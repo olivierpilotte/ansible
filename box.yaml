@@ -1,0 +1,10 @@
+---
+
+- hosts: box
+  become: yes
+  roles:
+    - gopher
+    - grafana
+    - node-exporter
+    - blackbox-exporter
+    - prometheus

@@ -1,0 +1,24 @@
+---
+
+- name: install prometheus
+  package:
+    name: prometheus
+    state: present
+
+- name: write configuration file
+  template:
+    src: prometheus.yaml
+    dest: /etc/prometheus/prometheus.yml
+  vars:
+    probes:
+      - name: grafana
+        host: localhost:3000
+
+      - name: prometheus
+        host: localhost:9090
+
+- name: start prometheus service
+  systemd:
+    name: prometheus
+    enabled: yes
+    state: restarted

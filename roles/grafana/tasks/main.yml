@@ -1,0 +1,11 @@
+---
+
+- name: install grafana
+  package:
+    name: grafana-bin
+
+- name: start grafana
+  systemd:
+    name: grafana
+    enabled: yes
+    state: started

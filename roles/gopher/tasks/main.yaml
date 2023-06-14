@@ -1,0 +1,23 @@
+---
+
+# - name: copy server files
+#   copy:
+#     src: ~/dev/op/scripts/gopher
+#     dest: /srv/
+
+- name: install motsognir
+  package:
+    name: motsognir
+    state: present
+
+- name: write configuration file
+  template:
+    src: motsognir.conf
+    dest: /etc/motsognir.conf
+    mode: 0600
+
+- name: enable motsognir service
+  systemd:
+    name: motsognir
+    enabled: yes
+    state: restarted
