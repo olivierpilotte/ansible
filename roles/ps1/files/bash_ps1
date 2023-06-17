@@ -1,0 +1,179 @@
+#!/bin/bash
+
+# https://unix.stackexchange.com/questions/269077/tput-setaf-color-table-how-to-determine-color-codes
+# https://askubuntu.com/questions/528928/how-to-do-underline-bold-italic-strikethrough-color-background-and-size-i
+
+# https://www.key-shortcut.com/en/writing-systems/35-symbols/symbols-typography
+
+#if [[ $- == *i* ]]; then
+    ncolors=$(tput colors)
+    if test -n "$ncolors" && test $ncolors -ge 8; then
+        bold="$(tput bold)"
+        # italic="\e[3m"
+        italic="$(tput sitm)"
+        underline="$(tput smul)"
+        standout="$(tput smso)"
+        normal="$(tput sgr0)"
+        black="$(tput setaf 0)"
+        red="$(tput setaf 1)"
+        green="$(tput setaf 2)"
+        yellow="$(tput setaf 3)"
+        blue="$(tput setaf 4)"
+        magenta="$(tput setaf 5)"
+        cyan="$(tput setaf 6)"
+        white="$(tput setaf 7)"
+
+        orange="$(tput setaf 202)"
+        purple="$(tput setaf 135)"
+        greenish="$(tput setaf 23)"
+        darkred="$(tput setaf 52)"
+        darkblueish="$(tput setaf 18)"
+
+        darkblue="$(tput setaf 26)"
+        lightblue="$(tput setaf 110)"
+        softblue="$(tput setaf 33)"
+        niceblue="$(tput setaf 69)"
+        softgray="$(tput setaf 250)"
+        gray="$(tput setaf 248)"
+        darkgray="$(tput setaf 242)"
+        softorange="$(tput setaf 178)"
+
+        backdark="$(tput setab 237)"
+
+        eol=$"\x1B[K"
+    fi
+#fi
+
+# echo -e "$(tput bold)\e[3m⏸\e[23m"
+
+function title() {
+   echo -ne "\033]0;▰▰▰ $* ▰▰▰\007"
+}
+
+export GIT_PS1_SHOWDIRTYSTATE=1
+
+function prompt() {
+    if [[ -n "${KUBE_CONFIG}" ]]; then
+        if [[ -n "${KUBE_FILTER}" && -n "${KUBE_NAMESPACE_OVERRIDE}" ]]; then
+            offset=152
+        elif [[ -n "${KUBE_FILTER}" ]]; then
+            offset=141
+        elif [[ -n "${KUBE_NAMESPACE_OVERRIDE}" ]]; then
+            offset=124
+        else
+            offset=113
+        fi
+    else
+        if [[ "`hostname`" == "x390" ]]; then
+            offset=56
+        else
+            offset=54
+        fi
+    fi
+
+    if [[ -n "${VIRTUAL_ENV}" ]]; then
+        env=`echo $VIRTUAL_ENV | grep -oE "[^/]+$"`
+        PYTHON_VENV="{venv:$env} "
+    fi
+
+    # SYMBOL=$'\u2388 '
+
+    # title "$HOSTNAME"
+
+    #printf '\033]2;${hostname}: ${PWD/#$HOME/\~}\033\\'
+    # ྾ ※ ‣ › ∴ ≫ ⊗ ⊹ ⋋ ⋌ ⋯ ★ ✲ ⦔ ⦕ ⦠ ＊ ⋄ ⏵ › ⏸ ◆ ◇ ⬥ ⬦ ▰ ≡            http://www.addressmunger.com/special_ascii_characters/
+    # ⊲ ⊳ ⋐ ⋑ ◄ ► ◅ ▻ ⧉ ⧏ ⧐ ⨝ ⨼ ⨽ ⦣ ⧽
+
+    # PS1=$(printf "\[\n\]\[%*s\]\[\r\]\[%s\]\[\n\]\[${blue}\]$(__kfg_ps1) \[${blue}\]\[›\] \[${white}\]" "$(($(tput cols)+${offset}))" "$(prompt_right)" "$(prompt_left)")
+
+    current_host=`hostname`
+    if [[ $current_host == "x390" ]]; then
+        color=${green}
+    else
+        color=${red}
+    fi
+
+    #       
+    #     
+    #          
+    #        
+    #          
+    #          
+    #       
+    #        
+    #      
+    #   
+    #   
+    #     
+    #           
+    #    
+    #                     
+    #    
+    #   
+    #  
+    #              
+    # 
+    #  
+    #               
+    #  
+    #                 
+    # 
+    # 
+    #  
+    #  
+    # 
+
+    PS1="\[\n\]\[${CONDA_PROMPT_MODIFIER}\]\[${blue}\]$PYTHON_VENV\[${white}\]\u \[${blue}\]@ \[$color\]\[\h\] \[${blue}\]\[\w\]\[${normal}\]\[$(__kfg_ps1)\]\[$(__git_ps1)\]\[\n\]\[${blue}\]\[›\] \[${normal}\]"
+
+    # export PS1="\[\e]0;$PS1"
+    current_host=`hostname`
+    if [[ $current_host == "x390" ]]; then
+        current_host=""
+    else
+        current_host="${current_host}: "
+    fi
+
+    current_path=`pwd | sed 's#/home/opilotte#~#g' | rev | cut -d'/' -f-3 | rev`
+    if [[ ${#current_path} -gt 25 ]]; then
+        current_path=`pwd | sed 's#/home/opilotte#~#g' | rev | cut -d'/' -f-2 | rev`
+        if [[ ${#current_path} -gt 25 ]]; then
+            current_path=`pwd | sed 's#/home/opilotte#~#g' | rev | cut -d'/' -f-1 | rev`
+        fi
+    fi
+
+    export PS1="\[\e]0;$current_host$current_path\a\]$PS1"
+
+    # PS1="\n${darkgray}\D{%H:%M} ${white}\u ${blue}@ ${darkgray}\h ${blue}\w${normal}$(__git_ps1) $(__kfg_ps1)\r\n${blue}› ${normal}"
+}
+
+export PROMPT_COMMAND="history -a; prompt"
+export HISTTIMEFORMAT="%y/%m/%d %T "
+
+# source ~/dev/github/pureline/pureline ~/.pureline.conf
+
+
+
+# _complete_ssh_hosts ()
+# {
+#         COMPREPLY=()
+#         cur="${COMP_WORDS[COMP_CWORD]}"
+#         comp_ssh_hosts=`cat ~/.ssh/config ~/.ssh/aws_config | grep -v "*" | awk '/^host/ {print $2}'`
+#         COMPREPLY=( $(compgen -W "${comp_ssh_hosts}" -- $cur))
+#         return 0
+# }
+# complete -F _complete_ssh_hosts ssh
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+__conda_setup="$('/home/op/miniconda3/bin/conda' 'shell.bash' 'hook' 2> /dev/null)"
+if [ $? -eq 0 ]; then
+    eval "$__conda_setup"
+else
+    if [ -f "/home/op/miniconda3/etc/profile.d/conda.sh" ]; then
+        . "/home/op/miniconda3/etc/profile.d/conda.sh"
+    else
+        export PATH="/home/op/miniconda3/bin:$PATH"
+    fi
+fi
+unset __conda_setup
+# <<< conda initialize <<<

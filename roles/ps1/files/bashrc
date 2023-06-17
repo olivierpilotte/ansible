@@ -1,0 +1,153 @@
+#!/bin/bash
+
+#export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
+
+# history
+unset HISTFILESIZE
+HISTSIZE=30000
+export HISTSIZE PROMPT_COMMAND
+shopt -s histappend
+
+export MESA_LOADER_DRIVER_OVERRIDE=i965
+
+[ -r ~/.bash_aliases ] && source ~/.bash_aliases
+[ -r ~/.bash_ps1 ] && source ~/.bash_ps1
+[ -r ~/.bash_motd ] && source ~/.bash_motd
+[ -r ~/.bash_functions ] && source ~/.bash_functions
+[ -r ~/.git-prompt.sh ] && source ~/.git-prompt.sh
+[ -r ~/.bash_wayup ] && source ~/.bash_wayup
+[ -r ~/.bash_completion ] && source ~/.bash_completion
+[ -r /usr/share/bash-completion/bash_completion ] && source /usr/share/bash-completion/bash_completion
+[ -r ~/dev/github/autorandr/contrib/bash_completion/autorandr ] && source ~/dev/github/autorandr/contrib/bash_completion/autorandr
+
+function log() {
+    foo=$@
+    for (( i=0; i<${#foo}; i++ )); do
+      echo -n "${foo:$i:1}"
+      # sleep 0.0005
+    done
+}
+
+# export DOWNGRADE_FROM_ALA=1
+
+export DOCKER_BUILDKIT=1
+export VAGRANT_DEFAULT_PROVIDER=libvirt
+
+export PATH="${PATH}:${HOME}/.krew/bin"
+export PATH="${PATH}:${HOME}/.local/bin"
+export PATH="${PATH}:${HOME}/go/bin"
+export PATH="${PATH}:${HOME}/.gem/ruby/2.7.0/bin"
+export PATH="${PATH}:${HOME}/.cargo/bin"
+export PATH="${PATH}:${HOME}/go/bin"
+
+# java font fix
+export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=gasp'
+
+# xdg config home
+export XDG_CONFIG_HOME="$HOME/.config"
+
+# brain.fm
+export BRAINFM_SID="s%3AKpFQ9nwiX50_8JYWO6wzDvHr58UWBb0k.l0HKxKhrDeNzezZypVbJF%2B4Pm2QPh3nMZIC1zNoGeNk"
+
+# 1password
+export OP_SESSION_my="yfRYMtkJjZbTOh-SyoHGEkr8jtvlkt3aJR2T9Npx05Q"
+export OP_SESSION_team_yello="ay_lF7-LTIslKflMiziOPgukf0YRh5s038dLtduLocM"
+
+# spotify
+export SPOTIPY_CLIENT_ID=fafa653056804699978decf9bb341dc2
+export SPOTIPY_CLIENT_SECRET=90191f8c70154c1baa2cb7ca52c0cd38
+
+# slack
+export SLACK_TOKEN=xoxp-2972170682-652955127380-818994881300-b575b823d06a1c03fa32e72376a17082
+
+# bash colors
+export CLICOLOR=1
+
+# editor
+export EDITOR=vim
+
+# node nvm
+# source /usr/share/nvm/init-nvm.sh
+
+# less colors
+export LESS_TERMCAP_mb=$'\e[1;37m'
+export LESS_TERMCAP_md=$'\e[1;37m'
+export LESS_TERMCAP_me=$'\e[0m'
+export LESS_TERMCAP_se=$'\e[0m'
+export LESS_TERMCAP_so=$'\e[01;33m'
+export LESS_TERMCAP_ue=$'\e[0m'
+export LESS_TERMCAP_us=$'\e[1;34m'
+
+# qute
+export QUTE_DATA_DIR=/home/opilotte/.config/qutebrowser/op/data
+export QUTE_CONFIG_DIR=/home/opilotte/.config/qutebrowser/op/config
+
+# sources
+if [ -r ~/k.sh ]; then
+    source ~/k.sh
+else
+    function __kfg_ps1() {
+        echo ""
+    }
+fi
+
+
+# ctrl backspace kill word
+#bind '"\C-H": shell-backward-kill-word'
+
+# input settings
+#~/inputs.sh
+
+# disable ctrl+s
+stty -ixon
+
+
+# Add RVM to PATH for scripting. Make sure this is the last PATH variable change.
+#export PATH="$PATH:$HOME/.rvm/bin"
+# [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+# source /usr/share/nvm/init-nvm.sh
+
+# nostromo [section begin]
+# eval "$(nostromo completion)"
+# nostromo [section end]
+
+export DB_NAME=tcjpr
+export DB_USER=dblab
+export DB_PASS=dblab
+export DB_HOST=dblab.db.wayupint.com
+export DB_PORT=5002
+
+export AWS_SECRET_ACCESS_KEY=ut5Oj9pLxYseFOBN8gZKjnjDduOGEhZCEatX9vgK
+export AWS_ACCESS_KEY_ID=AKIAYSCBTSX6NSXYPQ7H
+
+complete -F __start_kubectl k
+
+export DOWNGRADE_FROM_ALA=1
+
+export NNN_PLUG='f:finder;o:fzopen;p:mocplay;d:diffs;t:nmount;v:imgview'
+
+source <(gh completion -s bash)
+
+
+complete -C '/home/opilotte/.local/bin/aws_completer' aws
+
+
+function gpgkey() {
+	gpg --keyserver keyserver.ubuntu.com --recv-keys $1
+}
+
+# spotinst
+export SPOTINST_TOKEN=db6d5db01d5d7bb642b3218d392bca33a562329bdef848e4f14064b098fbefb6
+export SPOTINST_ACCOUNT=act-cf1719ca
+
+[ -x /usr/bin/go ] && export GOPATH=$(go env GOPATH)
+
+function download() {
+  youtube-dl --extract-audio --audio-format mp3 --output "~/Music/$2.%(ext)s" $1
+}
+
+export PATH=$HOME/bin:$PATH
+
+export OPENAI_API_KEY="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"
+export OPENAI_ORG_ID="org-pAhIQRKCVmR233wDvxYSgAqc"

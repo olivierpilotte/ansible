@@ -16,9 +16,10 @@
 
       - name: prometheus
         host: localhost:9090
+  notify: restart prometheus
 
 - name: start prometheus service
   systemd:
     name: prometheus
     enabled: yes
-    state: restarted
+    state: started

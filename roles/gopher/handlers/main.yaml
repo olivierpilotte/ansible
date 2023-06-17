@@ -1,0 +1,6 @@
+---
+
+- name: restart motsognir
+  service:
+    name: motsognir
+    state: restarted

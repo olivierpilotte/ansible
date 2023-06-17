@@ -1,0 +1,20 @@
+---
+
+- name: install dependencies
+  package:
+    name:
+      - neofetch
+      - github-cli
+    state: present
+
+- name: copy bash files
+  copy:
+    src: "{{ item }}"
+    dest: "/home/op/.{{ item }}"
+  with_items:
+    - bash_aliases
+    - bash_functions
+    - bash_motd
+    - bash_ps1
+    - git-prompt.sh
+    - bashrc

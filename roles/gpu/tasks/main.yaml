@@ -1,0 +1,17 @@
+---
+
+- name: install required packages
+  package:
+    name:
+      - cuda
+      - cuda-tools
+      - cudnn
+      - linux61-nvidia
+      - nccl
+
+- name: install pip dependecies
+  pip:
+    name:
+      - cuda-python
+      - tensorflow
+      - tensorrt

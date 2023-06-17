@@ -1,0 +1,44 @@
+#!/bin/bash
+# log "${blue}${bold}$(date +'%Y-%m-%d %R')"
+# echo ""
+# echo ""
+
+# # cat ~/.weather
+# # echo ""
+
+# #echo "---------------------------------"
+# #cat ~/.agenda
+# #echo ""
+# #echo "---------------------------------"
+
+# # echo ""
+# # echo ""
+# # printf "${blue}${bold}%10s${darkgray}: ${normal}%-20s\n" "updates" "$([ -r ~/.tmp/updates ] && cat ~/.tmp/updates | wc -l)"
+# log "${blue}${bold}updates${normal}${darkgray}: ${normal}$([ -r ~/.tmp/updates ] && cat ~/.tmp/updates | wc -l)"
+
+# echo ""
+
+# # printf "\n"
+
+# # printf "${blue}${bold}%10s${darkgray}: ${normal}%-20s\n" "local ip" "$([ -r ~/.tmp/local_ip ] && cat ~/.tmp/local_ip)"
+# log "${blue}${bold} lan ip${normal}${darkgray}: ${normal}$([ -r ~/.tmp/local_ip ] && cat ~/.tmp/local_ip)"
+
+# echo ""
+# # printf "${blue}${bold}%10s${darkgray}: ${normal}%-20s\n" "public ip" "$([ -r ~/.tmp/public_ip ] && cat ~/.tmp/public_ip)"
+# log "${blue}${bold} wan ip${normal}${darkgray}: ${normal}$([ -r ~/.tmp/public_ip ] && cat ~/.tmp/public_ip)"
+
+# echo ""
+# #echo ""
+
+export TERM_PROGRAM="alacritty"
+
+neofetch \
+    --color_blocks off \
+     --os_arch off \
+     --uptime_shorthand tiny \
+     --kernel_shorthand on \
+     --cpu_brand off \
+     --speed_shorthand on \
+     --disable shell kernel terminal uptime icons theme packages resolution wm gpu de \
+     --ascii_distro manjaro_small \
+     --colors 4 5 4 4 7 7

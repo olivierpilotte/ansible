@@ -10,14 +10,24 @@
     name: motsognir
     state: present
 
+- name: install pip dependencies
+  pip:
+    name:
+      - munch==3.0.0
+      - openai==0.27.8
+      - pdftotext==2.2.2
+      - python-dateutil==2.8.2
+      - xmltodict==0.13.0
+
 - name: write configuration file
   template:
     src: motsognir.conf
     dest: /etc/motsognir.conf
     mode: 0600
+  notify: restart motsognir
 
 - name: enable motsognir service
   systemd:
     name: motsognir
     enabled: yes
-    state: restarted
+    state: started

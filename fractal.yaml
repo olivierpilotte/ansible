@@ -3,4 +3,6 @@
 - hosts: fractal
   become: yes
   roles:
+    - ps1
     - node-exporter
+    - gpu

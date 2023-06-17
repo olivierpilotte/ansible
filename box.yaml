@@ -3,8 +3,11 @@
 - hosts: box
   become: yes
   roles:
+    - ps1
     - gopher
     - grafana
     - node-exporter
     - blackbox-exporter
     - prometheus
+    - loki
+    - promtail

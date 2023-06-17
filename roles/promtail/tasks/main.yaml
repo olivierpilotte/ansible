@@ -1,0 +1,12 @@
+---
+
+- name: install promtail
+  package:
+    name: promtail
+    state: present
+
+- name: enable promtail
+  service:
+    name: promtail
+    enabled: yes
+    state: started

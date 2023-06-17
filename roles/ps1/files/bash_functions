@@ -1,0 +1,28 @@
+#!/bin/bash
+
+function colors() {
+    for i in {0..255}; do printf "\x1b[38;5;${i}m%-5i\x1b[0m" $i ; if ! (( ($i + 1 ) % 8 )); then echo ; fi ; done
+}
+
+
+complete -W "\`grep -oE '^[a-zA-Z0-9_-]+:([^=]|$)' Makefile | sed 's/[^a-zA-Z0-9_-]*$//'\`" make
+# complete -W "$(echo `cat ~/.ssh/known_hosts | cut -f 1 -d ' ' | sed -e s/,.*//g | uniq | grep -v "\["`;)" ssh
+
+_complete_ssh_hosts()
+{
+        COMPREPLY=()
+        cur="${COMP_WORDS[COMP_CWORD]}"
+        comp_ssh_hosts=`cat ~/.ssh/aws_config | awk '/^host/ {print $2}'`
+        COMPREPLY=( $(compgen -W "${comp_ssh_hosts}" -- $cur))
+        return 0
+}
+complete -F _complete_ssh_hosts ssh
+
+function killproc() {
+    command="kill -9"
+
+    while read data; do
+        echo "$data" | awk '{print $2}' | xargs $command
+        # echo $data
+    done
+}

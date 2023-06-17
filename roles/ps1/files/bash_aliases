@@ -1,0 +1,53 @@
+alias ls="ls --color=always --group-directories-first"
+alias json='python -mjson.tool'
+
+alias vi="vim $@"
+
+alias gitlog="git log --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+
+alias errdev="cd ~/dev/wu/trooper/trooper; GITHUB_ACCESS_TOKEN=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 DBLAB_URL=http://dblab.db.wayupint.com. errbot -T"
+alias errtest="cd ~/dev/wu/trooper/trooper; GITHUB_ACCESS_TOKEN=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 pytest -vv"
+alias errlog="tail -F ~/dev/wu/trooper/trooper/data/err.log"
+
+alias nstat="sudo lsof -PiTCP -sTCP:LISTEN"
+
+alias gotop="gotop -c blue"
+
+alias bbs="telnet bbs.flatline.ltd"
+
+alias clear="clear; source ~/.bash_motd"
+
+alias sup='rvm 2.3.3 do sup'
+alias sup-config='rvm 2.3.3 do sup-config'
+
+alias ld="lazydocker"
+
+alias agenda="gcalcli agenda --color-date=white --color-now-marker=red --details description now `python -c 'import datetime; now = datetime.datetime.now(); print(f\"{now.year}-{now.month}-{now.day+2}\")'`"
+alias calw="gcalcli calw"
+alias calm="gcalcli calm"
+
+alias tsm="transmission-remote"
+
+alias logsearch="logdna search --prefer-head -h $@"
+alias logtail="logdna tail -h $@"
+
+alias weather="curl -ck wttr.in/Montreal"
+
+alias docker-copy="CONFIG_FILE=/home/opilotte/mirror.yaml docker-mirror"
+
+#alias reddit="TUIR_BROWSER=/usr/share/applications/org.qutebrowser.qutebrowser.desktop tuir"
+
+alias cligif="gif-for-cli --rows `tput lines` --cols `tput cols` 11699607"
+
+alias ncdu="ncdu --color dark"
+
+alias 2to3="helm3 2to3 $@"
+
+
+alias kops-build="cd ~/dev/op/; docker run -it -v /home/opilotte/dev/op/kops:/go/src/k8s.io/kops golang bash"
+
+alias kops-cherry-pick="UPSTREAM_REMOTE=upstream FORK_REMOTE=origin GITHUB_USER=olivierpilotte kops_cherry_pick_pull.sh origin/release-1.21 11958"
+
+alias launch-template-data="aws ec2 describe-launch-template-versions --launch-template-id $@ | jq -r '.LaunchTemplateVersions[0].LaunchTemplateData.UserData' | base64 --decode"
+
+alias ai="python /home/opilotte/dev/op/openai-shell/shell.py"

@@ -1,0 +1,12 @@
+---
+
+- name: install grafana loki
+  package:
+    name: loki
+    state: present
+
+- name: enable and start loki
+  service:
+    name: loki
+    enabled: yes
+    state: started
